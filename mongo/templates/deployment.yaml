@@ -5,6 +5,10 @@ metadata:
   labels:
     {{- include "mongo.labels" . | nindent 4 }}
 spec:
+  volumes:
+  - name: pvc-cliam
+    persistentVolumeClaim:
+        claimName: my-pvc
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
@@ -37,6 +41,19 @@ spec:
             - name: http
               containerPort: 27017
               protocol: TCP
+          env:
+          - name: MONGO_DB_HOSTNAME
+            value: mongo
+          - name: MONGO_DB_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: username-pwd
+                key: mongodb_username
+          - name: MONGO_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: username-pwd-my-secret
+                key: mongodb_password
           livenessProbe:
             httpGet:
               path: /
