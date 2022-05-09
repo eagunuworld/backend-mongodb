@@ -22,7 +22,7 @@ pipeline{
         stage('Deploy MongoDB In Kubernetes Clusters') {
                steps {
                    withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
-                   sh "helm upgrade --install  --force --set name=${NAME} mongodbapp mongo/"
+                   sh "helm upgrade --install  --force --set name=${NAME} --set image.tag=5 mongodbapp mongo/"
                      }
                  }
              }
