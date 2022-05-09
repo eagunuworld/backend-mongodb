@@ -3,7 +3,7 @@ pipeline{
 
        environment {
             DEPLOY = "${env.BRANCH_NAME == "development" || env.BRANCH_NAME == "master" ? "true" : "false"}"
-            NAME = "${env.BRANCH_NAME == "master" ? "example" : "example-staging"}"
+            NAME = "${env.BRANCH_NAME == "master" ? "example" : "examp-staging"}"
             def mavenHome =  tool name: "maven:3.8.5", type: "maven"
             VERSION = "${env.BUILD_ID}"
             REGISTRY = 'eagunuworld/eagunu-mongo-db'
@@ -22,7 +22,7 @@ pipeline{
         stage('Deploy MongoDB In Kubernetes Clusters') {
                steps {
                    withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
-                   sh "helm upgrade --install  mongodb backend-mongodb/"
+                   sh "helm upgrade --install  --force --set name=${NAME} mongodbapp mongo/"
                      }
                  }
              }
