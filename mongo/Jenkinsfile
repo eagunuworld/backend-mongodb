@@ -3,7 +3,7 @@ pipeline{
 
        environment {
             DEPLOY = "${env.BRANCH_NAME == "development" || env.BRANCH_NAME == "master" ? "true" : "false"}"
-            NAME = "${env.BRANCH_NAME == "master" ? "example" : "example-staging"}"
+            NAME = "${env.BRANCH_NAME == "master" ? "example" : "examp-staging"}"
             def mavenHome =  tool name: "maven:3.8.5", type: "maven"
             VERSION = "${env.BUILD_ID}"
             REGISTRY = 'eagunuworld/eagunu-mongo-db'
