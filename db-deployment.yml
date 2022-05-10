@@ -33,9 +33,9 @@ spec:
               secretKeyRef:
                 name: username-pwd-my-secret
                 key: mongodb_password
-        volumeMounts:
-          - name: pvc-cliam
-            mountPath: /data/db
+         volumeMounts:
+         - name: pvc-cliam
+           mountPath: /data/db
 ---
 apiVersion: v1
 kind: Service
