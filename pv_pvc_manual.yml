@@ -7,14 +7,14 @@ spec:
   capacity:
     storage: 1Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   hostPath:
     path: "/var/backup/"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name:  my-pvc 
+  name:  my-pvc
 spec:
   accessModes:
     - ReadWriteMany
