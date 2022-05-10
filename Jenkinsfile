@@ -14,7 +14,7 @@ pipeline{
       stage('PersistentVolume And PersistentVolumeClaim') {
               steps {
                   withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
-                    sh "kubectl apply -f pv_pvc_manual.yml"
+                    sh "kubectl apply -f pv_pvc_4_rs.yml"
                         }
                       }
                  }
