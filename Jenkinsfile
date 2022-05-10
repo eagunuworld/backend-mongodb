@@ -27,7 +27,7 @@ pipeline{
                  }
              }
 
-      stage('Deploy MongoDB In Kubernetes Clusters') {
+      stage('kubectl get po,svc') {
               steps {
                   withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
                       sh "kubectl get po,svc -A"
