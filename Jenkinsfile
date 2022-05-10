@@ -46,7 +46,7 @@ pipeline{
       stage('Deploy MongoDB Service') {
              steps {
                  withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
-                 sh "kubectl apply -f mongodb-service.yml"
+                 sh "kubectl apply -f db-clusterIP.yml"
                    }
                }
            }
