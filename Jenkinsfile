@@ -30,10 +30,26 @@ pipeline{
         stage('Deploy MongoDB In Kubernetes Clusters') {
                steps {
                    withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
-                   sh "kubectl apply -f db-deployment.yml"
+                   sh "kubectl apply -f db-replicatSet.yml"
                      }
                  }
              }
+
+      // stage('Deploy MongoDB In K8s As StatefulSet') {
+      //        steps {
+      //               withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
+      //                   sh "kubectl apply -f db-statefulSet.yml"
+      //                     }
+      //                 }
+      //             }
+
+      stage('Deploy MongoDB Service') {
+             steps {
+                 withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
+                 sh "kubectl apply -f mongodb-service.yml"
+                   }
+               }
+           }
 
       stage('kubectl get po,svc') {
               steps {

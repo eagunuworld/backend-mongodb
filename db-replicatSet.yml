@@ -36,15 +36,3 @@ spec:
          volumeMounts:
          - name: pvc-cliam
            mountPath: /data/db
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongo
-spec:
-  type: ClusterIP
-  selector:
-    app: mongodb
-  ports:
-  - port: 27017
-    targetPort: 27017
