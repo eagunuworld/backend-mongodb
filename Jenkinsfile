@@ -19,6 +19,14 @@ pipeline{
                       }
                  }
 
+   stage('kubectl Get PV,PVC') {
+              steps {
+                  withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
+                      sh "kubectl get pv,pvc -A"
+                        }
+                      }
+                  }
+
         stage('Deploy MongoDB In Kubernetes Clusters') {
                steps {
                    withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
